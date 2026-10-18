@@ -1,0 +1,138 @@
+
+<!-- allgemeine Anzeige  -->
+<div class="spielerAnzeige">
+  <h1 class="ueberschrift">Vier Gewinnt</h1>
+  <div>
+    <span class="zugeInRunde">Zuge in der Runde : {{zaehler()}}</span>
+  </div>
+
+
+  <!-- Scoreboard für die Spieler und Punkte -->
+  <div class="spielerh2">
+    <span class="spielerAusgabe1">({{punkteSpieler1()}}) {{speichernSpieler1()}}</span> |vs|
+    <span class="spielerAusgabe2">{{speichernSpieler2()}} ({{punkteSpieler2()}})</span>
+  </div>
+
+  <!-- Zeigt welcher Spieler am Zug ist  -->
+  <h2>Spieler am Zug
+    @if (spieler1IstDran){
+    <h2 class="spielerAusgabe1">{{speichernSpieler1()}}</h2>
+    } @else{
+    <h2 class="spielerAusgabe2">{{speichernSpieler2()}}</h2>
+    }
+  </h2>
+</div>
+
+
+
+<!-- Keine möglichkeit den Stein zurück zu setzen wenn man gegen den KI Computer spielt + Zeitanzeige -->
+@if (!gegenKiSpielen()) {
+  <div class="sticky">
+    <button class="button_statistik" (click)="steinZuruecksetzen()">Rückgängig</button>
+    <label class="zeit-anzeige {{zeitKlasse()}}">Zeit: {{verbleibendeZeit()}}s</label>
+  </div>
+}
+
+<!-- nimmt css klassen anhand user input z.b die klasse grid-spalten-(anzahlSpalten), er hängt die dran  -->
+<div class="brett" [class]="'grid-spalten-' + anzahlSpalten() + ' grid-zeilen-' + anzahlZeilen()">
+  @for (zeile of spielfeld(); track $index; let zeileIndex = $index) {
+     <!--  läuft durch die 6 zeilen und speichert die Nummern in der Variable zeileIndex-->
+        @for (feld of zeile; track $index; let spalte = $index) {
+          <!--  läuft durch die 7 spalten der aktuellen zeile-->
+            <div [class]="getZellenName(feld, spalte)"
+              (mouseover)="gehoverteSpalte.set(spalte)"
+              (mouseleave)="gehoverteSpalte.set(-1)"
+              (click)="spielZug(spalte)">
+            </div>
+        }
+  }
+</div>
+
+
+  <!-- Hier wird gezeigt wer gewonnen hat -->
+@if (gewinnAnzeige()){
+<div class="modal">
+  <div class="modalHintergrund">
+    <h3 class="spielerh2">
+      @if (spieler1IstDran){
+      <h2 class="spielerAusgabe1">{{speichernSpieler1()}} </h2>hat Gewonnen
+      }
+      @else {
+      <h2 class="spielerAusgabe2">{{speichernSpieler2()}} </h2>hat Gewonnen
+      }
+    </h3>
+    <button class="button" (click)="seiteNeustart()">Neustart</button>
+  </div>
+</div>
+}
+
+<!-- Wenn alle Spalten voll sind gibt es ein unentschieden -->
+@if(unentschieden())
+{
+<div class="modal">
+  <div class="modalHintergrund">
+    <h3>Unentschieden</h3>
+    <button class="button" (click)="seiteNeustart()">Neustart</button>
+  </div>
+</div>
+}
+
+
+<!-- Die anzeige für volle Spalte -->
+@if (vollSpalteAnzeige()){
+<div class="modal">
+  <div class="modalHintergrund">
+    <h3>Die Spalte ist voll!</h3>
+    <button class="button" (click)="(vollSpalteAnzeige.set(false))">OK</button>
+  </div>
+</div>
+}
+
+
+
+<!-- Modus aussuchen -->
+@if (!modusAussuchen()){
+<div class="modal">
+  <div class="modalHintergrund">
+    <h3>Modus wählen</h3>
+    <button class="button" (click)="modusAussuchen.set(true)">Normal</button>
+    <button class="button" (click)="modusAussuchen.set(true) ; starteKiModus()">Gegen KI</button>
+    <button class="button" (click)="zeitKlasse.set(`sichtbar`) ; modusAussuchen.set(true)">Auf Zeit</button>
+     <div>
+   </div>
+  </div>
+</div>
+}
+
+
+<!-- Spieler Name Input -->
+@if (modusAussuchen() && spielernameEingabe() && !gegenKiSpielen()) {
+  <app-spielername-form (onSubmitClicked)="onSubmitSpielerName($event)"></app-spielername-form>
+}
+
+<!-- Spalten & Zeilen Input -->
+@if (modusAussuchen() && !spielfeldGroesseEingabe() && (!spielernameEingabe() || gegenKiSpielen())) {
+  <app-spielfeldgroesse-form (onSubmitClicked)="onSpielfeldSubmit($event)"></app-spielfeldgroesse-form>
+}
+
+<!-- Eine Checkbox um eine statistik anzeigen -->
+<div class="label_statistik" [hidden]="!gegenKiSpielen()">
+  <label>Statistik Anzeigen</label>
+  <input type="checkbox"  #angeclickt (change)="0">
+</div>
+
+<!-- Wenn die Checkbox angeclickt wird sollen Werte angezeigt werden + man kann Statistik zurücksetzen -->
+@if (gegenKiSpielen() && angeclickt.checked) {
+  <div class="kiStatistik">
+    <p class="statistik_ue">Gesamtstatistik</p>
+    <p class="statistik">
+      Runden gesamt:  <span>{{rundenKi()}}</span><br>
+      KI Siege:       <span>{{kiSiege()}}</span><br>
+      Spieler Siege:  <span>{{spielerSiege()}}</span><br><br>
+      Gewinnrate:     <span>{{ gewinnRate() | roundPipe }} %</span>
+    </p>
+    <button class="button_statistik" (click)="localStorageReset()">Statistik zurücksetzen</button>
+  </div>
+}
+
+

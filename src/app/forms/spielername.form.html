@@ -1,0 +1,10 @@
+<form [formGroup]="formSpielerName" (ngSubmit)="onSubmit()">
+  <div class="modal">
+    <div class="modalHintergrund">
+      <h3>Spielernamen</h3>
+      <input class="input_player" name="Name von Spieler 1 eingeben" placeholder="Name von Spieler 1 eingeben"  formControlName="speichernSpieler1">
+      <input class="input_player" name="Name von Spieler 1 eingeben" placeholder="Name von Spieler 2 eingeben"  formControlName="speichernSpieler2">
+      <button class="button" [disabled]="!formSpielerName.valid" type="submit" >Weiter</button>
+    </div>
+  </div>
+</form>

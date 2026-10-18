@@ -1,0 +1,21 @@
+<form>
+  <div class="modal">
+    <div class="modalHintergrund">
+    <h3>Spielfeldgröße wählen</h3>
+      <form [formGroup]="formBrett" (ngSubmit)="onSubmit()" >
+        <h3 class="validierungstext">Zeilen (5 - 20)</h3>
+        <input class="input_player" type="number" name="Anzahl der Zeilen"  placeholder="Anzahl der Zeilen"  min="5" max="20"  formControlName="anzahlZeilen">
+        <h3 class="validierungstext">Spalten (6 - 20)</h3>
+        <input class="input_player" type="number" name="Anzahl der Spalten" placeholder="Anzahl der Spalten" min="6" max="20" formControlName="anzahlSpalten">
+
+        @if (formBrett.invalid) {
+          <div class="validierung_falsch">Bitte gültige Werte eingeben!</div>
+        } @else {
+          <div class="validierung_richtig">Sie können spielen!</div>
+        }
+
+        <button class="button" [disabled]="!formBrett.valid" type="submit">Spielen</button>
+      </form>
+    </div>
+  </div>
+</form>

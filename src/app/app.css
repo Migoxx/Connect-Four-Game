@@ -1,0 +1,340 @@
+.spielerAusgabe1 {
+  color: #690202;
+  margin: auto;
+  padding-bottom: 10px;
+  text-align: center;
+  font-size: 50px;
+}
+
+.spielerAusgabe2 {
+  color: #052e68;
+  margin: auto;
+  padding-bottom: 10px;
+  text-align: center;
+  font-size: 50px;
+}
+
+h2 {
+  margin-top: auto;
+  font-size: 30px;
+}
+
+.spielerh2 {
+  margin-top: auto;
+  font-size: 30px;
+  text-align: center;
+}
+
+h3 {
+  font-size: 40px;
+  margin: 10px;
+}
+
+h4 {
+  text-align: center;
+  margin: auto
+}
+
+
+.spielerAnzeige {
+  text-align: center;
+  background-color: #7c7254;
+  border-radius: 13px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.ueberschrift {
+  margin: auto;
+  font-size: 45px;
+  text-align: center;
+  background-color: #333;
+  color: white;
+  box-shadow: 0 0 25px #000000;
+  border: solid #ffffff
+
+}
+
+.brett {
+  display: grid;
+  gap: 8px;
+  background-color: #7c7254;
+  padding: 15px;
+  width: max-content;
+  margin: auto;
+  border-radius: 13px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+
+
+  --zellen-groesse: 90px;
+}
+
+/* * visiert alle css klassen an, in diesen Fall grid-zeilen und spalten die mit 1 und 2 anfangen (GLobal Class Application)*/
+[class*="grid-zeilen-1"],
+[class*="grid-zeilen-2"],
+[class*="grid-spalten-1"],
+[class*="grid-spalten-2"] {
+  --zellen-groesse: 6vmin;
+}
+
+.grid-zeilen-5 { grid-template-rows: repeat(5, var(--zellen-groesse)); }
+.grid-zeilen-6 { grid-template-rows: repeat(6, var(--zellen-groesse)); }
+.grid-zeilen-7 { grid-template-rows: repeat(7, var(--zellen-groesse)); }
+.grid-zeilen-8 { grid-template-rows: repeat(8, var(--zellen-groesse)); }
+.grid-zeilen-9 { grid-template-rows: repeat(9, var(--zellen-groesse)); }
+.grid-zeilen-10 { grid-template-rows: repeat(10, var(--zellen-groesse)); }
+.grid-zeilen-11 { grid-template-rows: repeat(11, var(--zellen-groesse)); }
+.grid-zeilen-12 { grid-template-rows: repeat(12, var(--zellen-groesse)); }
+.grid-zeilen-13 { grid-template-rows: repeat(13, var(--zellen-groesse)); }
+.grid-zeilen-14 { grid-template-rows: repeat(14, var(--zellen-groesse)); }
+.grid-zeilen-15 { grid-template-rows: repeat(15, var(--zellen-groesse)); }
+.grid-zeilen-16 { grid-template-rows: repeat(16, var(--zellen-groesse)); }
+.grid-zeilen-17 { grid-template-rows: repeat(17, var(--zellen-groesse)); }
+.grid-zeilen-18 { grid-template-rows: repeat(18, var(--zellen-groesse)); }
+.grid-zeilen-19 { grid-template-rows: repeat(19, var(--zellen-groesse)); }
+.grid-zeilen-20 { grid-template-rows: repeat(20, var(--zellen-groesse)); }
+
+
+.grid-spalten-6 { grid-template-columns: repeat(6, var(--zellen-groesse)); }
+.grid-spalten-7 { grid-template-columns: repeat(7, var(--zellen-groesse)); }
+.grid-spalten-8 { grid-template-columns: repeat(8, var(--zellen-groesse)); }
+.grid-spalten-9 { grid-template-columns: repeat(9, var(--zellen-groesse)); }
+.grid-spalten-10 { grid-template-columns: repeat(10, var(--zellen-groesse)); }
+.grid-spalten-11 { grid-template-columns: repeat(11, var(--zellen-groesse)); }
+.grid-spalten-12 { grid-template-columns: repeat(12, var(--zellen-groesse)); }
+.grid-spalten-13 { grid-template-columns: repeat(13, var(--zellen-groesse)); }
+.grid-spalten-14 { grid-template-columns: repeat(14, var(--zellen-groesse)); }
+.grid-spalten-15 { grid-template-columns: repeat(15, var(--zellen-groesse)); }
+.grid-spalten-16 { grid-template-columns: repeat(16, var(--zellen-groesse)); }
+.grid-spalten-17 { grid-template-columns: repeat(17, var(--zellen-groesse)); }
+.grid-spalten-18 { grid-template-columns: repeat(18, var(--zellen-groesse)); }
+.grid-spalten-19 { grid-template-columns: repeat(19, var(--zellen-groesse)); }
+.grid-spalten-20 { grid-template-columns: repeat(20, var(--zellen-groesse)); }
+
+
+
+.zelle {
+  width: var(--zellen-groesse);
+  height: var(--zellen-groesse);
+  border-radius: 50%;
+  background-color: #e1c18f;
+  margin: auto;
+  border: solid;
+  cursor: pointer;
+  border: 2px solid #000000;
+  box-shadow: 0 0 5px #000000;
+}
+
+
+
+.vorschau-spieler1 {
+  box-shadow: inset 0 0 15px #690202;
+}
+
+.vorschau-spieler2 {
+  box-shadow: inset 0 0 15px #052e68;
+}
+
+
+
+
+@keyframes zelleRotAnimation {
+  from {
+    scale: 80%;
+  }
+
+  to {
+    scale: 100%;
+  }
+}
+
+@keyframes zelleBlauAnimation {
+  from {
+    scale: 80%;
+  }
+
+  to {
+    scale: 100%;
+  }
+}
+
+.rot {
+  background-color: #690202;
+  animation: zelleRotAnimation 0.5s ease-out;
+}
+
+.blau {
+  background-color: #052e68;
+  animation: zelleBlauAnimation 0.5s ease-out;
+}
+
+.gewonnen {
+  border: 4px solid #ffffff;
+  box-shadow: 0 0 25px #ffffff;
+}
+
+.modal {
+  font-size: 55px;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: lab(0% 0 0 / 0.6);
+  align-items: flex-start;
+  padding-top: 25px;
+
+}
+
+.modalHintergrund {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-style: solid;
+  border-color: #fcfcfc;
+  padding: 1rem 3rem;
+  background: rgb(255, 255, 255);
+  max-width: 400px;
+  padding-top: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 5px 30px 0 rgb(0 0 0 / 90%);
+}
+
+.button {
+  width: 300px;
+  font-size: 30px;
+  color: rgb(252, 246, 246);
+  padding: 5px;
+  margin: 5px;
+  background: #0c0c0c;
+  border-radius: 10px;
+  border-style: solid;
+  cursor: pointer;
+  width: 450px;
+  border-color: #ffffff;
+  border-width: 4px;
+  box-shadow: 0 0 25px #181818;
+}
+
+.button_statistik {
+  cursor: pointer;
+  width: 200px;
+  height: 70px;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 18px;
+  background-color: #333;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 4px solid #ffffff;
+  box-shadow: 0 0 25px #ffffff;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+}
+
+.input_player {
+  color: #000000;
+  border: 2px solid #e1c18f;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 25px;
+  width: 400px;
+  font-size: 15px;
+}
+
+.zeit-anzeige.versteckt {
+  display: none;
+}
+
+.zeit-anzeige.sichtbar {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  font-size: 23px;
+  font-weight: bold;
+  background-color: #333;
+  color: white;
+  padding: 18px 55px;
+  border-radius: 8px;
+  border: 4px solid #ffffff;
+  box-shadow: 0 0 25px #ffffff;
+}
+
+.zugeInRunde {
+  display: block;
+  font-size: 24px;
+  background-color: #7c7254;
+  color: rgb(0, 0, 0);
+}
+
+.kiStatistik {
+  box-shadow: 0 0 25px #000000;
+  text-align: center;
+  display: block;
+  font-size: 24px;
+  font-weight: lighter;
+  background-color: #333;
+  color: white;
+  position: absolute;
+  top: 27%;
+
+  border-radius: 8px;
+  padding: 7px;
+}
+
+.statistik_ue {
+  font-size: 35px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: 2px solid #ffffff;
+  margin: auto;
+  padding: 5px;
+  color: #e1c18f;
+}
+
+.statistik {
+  text-align: left;
+}
+
+span {
+  color: #e1c18f;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.label_statistik {
+  font-size: 30px;
+  font-weight: bold;
+  position: absolute;
+  top: 20%;
+  margin: 10px;
+  padding: auto;
+}
+
+.validierung_richtig {
+  text-align: center;
+  font-size: 30px;
+  color: darkgreen;
+}
+
+.validierung_falsch {
+  text-align: center;
+  font-size: 30px;
+  color: darkred;
+}
+
+
+.validierungstext {
+  font-size: 25px;
+  margin: auto;
+  text-align: center;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+  transform: scale(1.6);
+  margin: 10px;
+}
